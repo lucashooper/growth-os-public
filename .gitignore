@@ -1,0 +1,46 @@
+﻿# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+
+# Node / Next (web app)
+web/node_modules/
+web/.next/
+web/out/
+web/build/
+web/coverage/
+web/.env
+web/.env.local
+web/prisma/*.db
+web/prisma/*.db-journal
+web/public/uploads/**
+
+# Local artifacts (keep repo lean)
+generated/
+data/
+reference_images/
+
+# Local Netlify folder
+.netlify
+
+# Host deploy dumps (site ids, private repo links)
+web/deploy-list.json
+
+# Supabase CLI (may contain DB URLs)
+supabase/.temp/
+supabase/.branches/
+
+# Generated prisma alternate schema
+web/prisma/schema.postgres.prisma
+web/prisma/schema.prisma.bak

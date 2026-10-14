@@ -1,0 +1,245 @@
+{
+  "branding": {
+    "colorScheme": "light",
+    "fonts": [
+      {
+        "family": "Inter",
+        "role": "body"
+      },
+      {
+        "family": "Waldenburg",
+        "role": "unknown"
+      }
+    ],
+    "colors": {
+      "primary": "#000000",
+      "accent": "#000000",
+      "background": "#FDFCFC",
+      "textPrimary": "#000000",
+      "link": "#000000"
+    },
+    "typography": {
+      "fontFamilies": {
+        "primary": "Inter",
+        "heading": "Inter"
+      },
+      "fontStacks": {
+        "heading": [
+          "Waldenburg"
+        ],
+        "body": [
+          "Inter"
+        ],
+        "paragraph": [
+          "Inter"
+        ]
+      },
+      "fontSizes": {
+        "h1": "48px",
+        "h2": "16px",
+        "body": "16px"
+      }
+    },
+    "spacing": {
+      "baseUnit": 8,
+      "borderRadius": "4px"
+    },
+    "components": {
+      "input": {
+        "background": "transparent",
+        "textColor": null,
+        "borderColor": null,
+        "borderRadius": "0px",
+        "borderRadiusCorners": {
+          "topLeft": "0px",
+          "topRight": "0px",
+          "bottomRight": "0px",
+          "bottomLeft": "0px"
+        },
+        "shadow": "none"
+      },
+      "buttonPrimary": {
+        "background": "#000000",
+        "textColor": "#FFFFFF",
+        "borderRadius": "9999px",
+        "borderRadiusCorners": {
+          "topLeft": "9999px",
+          "topRight": "9999px",
+          "bottomRight": "9999px",
+          "bottomLeft": "9999px"
+        },
+        "shadow": "none"
+      },
+      "buttonSecondary": {
+        "background": "#FFFFFF",
+        "textColor": "#000000",
+        "borderRadius": "9999px",
+        "borderRadiusCorners": {
+          "topLeft": "9999px",
+          "topRight": "9999px",
+          "bottomRight": "9999px",
+          "bottomLeft": "9999px"
+        },
+        "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.4) 0px 0px 1px 0px, rgba(0, 0, 0, 0.04) 0px 1px 1px 0px, rgba(0, 0, 0, 0.04) 0px 2px 4px 0px"
+      }
+    },
+    "images": {
+      "logo": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22currentColor%22%20viewBox%3D%220%200%20117%2015%22%20aria-hidden%3D%22true%22%20style%3D%22height%3A%200.9375rem%3B%20overflow%3A%20visible%3B%22%20data-fc-idx%3D%220%22%3E%3Cpath%20d%3D%22M41.507%203.698h-2.975l3.595%2011.054h3.203l3.595-11.054h-2.976l-2.25%208.327zM0%200h3.079v14.752H0zM6.115%200h3.079v14.752H6.115zM12.23%200h9.112v2.459H15.31V5.97h5.62V8.43h-5.62v3.863h6.033v2.46h-9.111zM23.222%200h2.913v14.752h-2.913zM27.892%209.215c0-4.029%202.004-5.765%205.124-5.765s4.896%201.715%204.896%205.806v.661h-7.148c.103%202.397.826%203.203%202.21%203.203%201.095%200%201.777-.64%201.901-1.756h2.913C37.602%2013.802%2035.578%2015%2032.974%2015c-3.305%200-5.082-1.756-5.082-5.785m7.148-1.22c-.144-2.024-.847-2.685-2.066-2.685s-1.983.682-2.19%202.686zM49.482%209.215c0-4.029%202.005-5.765%205.124-5.765%203.12%200%204.897%201.715%204.897%205.806v.661h-7.149c.104%202.397.827%203.203%202.211%203.203%201.095%200%201.777-.64%201.9-1.756h2.914C59.193%2013.802%2057.17%2015%2054.565%2015c-3.306%200-5.083-1.756-5.083-5.785m7.15-1.22c-.145-2.024-.848-2.685-2.067-2.685s-1.983.682-2.19%202.686zM73.304%200h3.079v12.293h5.785v2.46h-8.864z%22%2F%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M82.891%209.215c0-4.215%201.942-5.765%204.442-5.765%201.24%200%202.376.703%202.83%201.447V3.698h2.976v11.054h-2.892V13.45c-.434.868-1.653%201.55-2.996%201.55-2.645%200-4.36-1.694-4.36-5.785m5.207-3.595c1.446%200%202.231%201.095%202.231%203.595s-.785%203.616-2.231%203.616c-1.447%200-2.273-1.116-2.273-3.616s.826-3.595%202.273-3.595M98.284%2013.45v1.302H95.39V0h2.913v4.897c.496-.765%201.653-1.447%202.893-1.447%202.438%200%204.38%201.55%204.38%205.765S103.676%2015%20101.135%2015c-1.343%200-2.438-.682-2.851-1.55m2.086-7.81c1.447%200%202.273%201.075%202.273%203.575s-.826%203.616-2.273%203.616c-1.446%200-2.231-1.116-2.231-3.616s.785-3.574%202.231-3.574%22%2F%3E%3Cpath%20d%3D%22M106.776%2011.467h2.913c.041%201.157.661%201.715%201.756%201.715s1.715-.496%201.715-1.364c0-.785-.475-1.074-1.508-1.322l-.889-.227c-2.52-.64-3.781-1.323-3.781-3.41%200-2.086%201.942-3.409%204.422-3.409s4.359.972%204.442%203.265h-2.913c-.062-1.012-.682-1.446-1.571-1.446s-1.508.434-1.508%201.26c0%20.764.496%201.054%201.364%201.26l.909.228c2.397.599%203.905%201.198%203.905%203.43%200%202.23-1.984%203.553-4.67%203.553-2.913%200-4.524-1.095-4.586-3.533M64.214%208.244c0-1.736.826-2.686%202.107-2.686%201.054%200%201.653.661%201.653%202.087v7.107h2.913V7.19c0-2.562-1.446-3.74-3.553-3.74-1.426%200-2.604.724-3.12%201.674V3.698h-2.955v11.054h2.955z%22%2F%3E%3C%2Fsvg%3E",
+      "favicon": "https://elevenlabs.io/favicon.ico?9c55860cee08706b",
+      "ogImage": "https://elevenlabs.io/cover.png",
+      "logoHref": "/"
+    },
+    "__llm_logo_reasoning": {
+      "selectedIndex": 0,
+      "reasoning": "Selected #0 because it is located in the header, is visible, and links to the homepage, matching the brand 'ElevenLabs'.",
+      "confidence": 0.95,
+      "source": "llm"
+    },
+    "__llm_button_reasoning": {
+      "primary": {
+        "index": 0,
+        "text": "Sign up",
+        "reasoning": "Button #1 ('Sign up') is the primary CTA due to its action-oriented text and high contrast with the dark background, making it stand out as a key action for user engagement."
+      },
+      "secondary": {
+        "index": 2,
+        "text": "Get started",
+        "reasoning": "Button #0 ('Get started') serves as a secondary CTA with a lighter background, providing a less prominent but still important action for users."
+      },
+      "confidence": 0.9
+    },
+    "personality": {
+      "tone": "modern",
+      "energy": "medium",
+      "targetAudience": "tech-savvy professionals and developers"
+    },
+    "designSystem": {
+      "framework": "tailwind",
+      "componentLibrary": ""
+    },
+    "confidence": {
+      "buttons": 0.9,
+      "colors": 0.9,
+      "overall": 0.9
+    },
+    "__llm_metadata": {
+      "logoSelection": {
+        "llmCalled": true,
+        "llmSucceeded": true,
+        "finalSource": "llm",
+        "rawLogoSelection": {
+          "selectedLogoIndex": 0,
+          "selectedLogoReasoning": "Selected #0 because it is located in the header, is visible, and links to the homepage, matching the brand 'ElevenLabs'.",
+          "confidence": 0.95
+        }
+      },
+      "buttonClassification": {
+        "llmCalled": true,
+        "llmSucceeded": true
+      }
+    }
+  },
+  "metadata": {
+    "description": "Create lifelike speech with our AI voice generator and voice agents platform. Access 5,000+ voices in 70+ languages with secure APIs and SDKs.",
+    "og:type": "website",
+    "next-size-adjust": "",
+    "twitter:creator": "@elevenlabs",
+    "twitter:description": "Create lifelike speech with our AI voice generator and voice agents platform. Access 5,000+ voices in 70+ languages with secure APIs and SDKs.",
+    "og:description": "Create lifelike speech with our AI voice generator and voice agents platform. Access 5,000+ voices in 70+ languages with secure APIs and SDKs.",
+    "twitter:card": "summary_large_image",
+    "ogSiteName": "ElevenLabs",
+    "ogLocale": "en",
+    "twitter:image": "https://elevenlabs.io/cover.png",
+    "og:image:width": "1200",
+    "viewport": "width=device-width, initial-scale=1",
+    "og:image": "https://elevenlabs.io/cover.png",
+    "twitter:site": "@elevenlabs",
+    "title": "Free AI Voice Generator & Voice Agents Platform | ElevenLabs",
+    "og:image:height": "630",
+    "robots": "noindex",
+    "twitter:image:height": "630",
+    "og:title": "Free AI Voice Generator & Voice Agents Platform | ElevenLabs",
+    "ogImage": "https://elevenlabs.io/cover.png",
+    "twitter:image:width": "1200",
+    "language": "en",
+    "og:site_name": "ElevenLabs",
+    "ogTitle": "Free AI Voice Generator & Voice Agents Platform | ElevenLabs",
+    "og:url": "https://elevenlabs.io/abtest/elevenlabs-home-redesign-2026-agent-book-demo",
+    "ogDescription": "Create lifelike speech with our AI voice generator and voice agents platform. Access 5,000+ voices in 70+ languages with secure APIs and SDKs.",
+    "twitter:title": "Free AI Voice Generator & Voice Agents Platform | ElevenLabs",
+    "og:locale": "en",
+    "ogUrl": "https://elevenlabs.io/abtest/elevenlabs-home-redesign-2026-agent-book-demo",
+    "favicon": "https://elevenlabs.io/favicon.ico?9c55860cee08706b",
+    "scrapeId": "019fa332-f5d7-707a-a9c0-df69063adcda",
+    "sourceURL": "https://elevenlabs.io/",
+    "url": "https://elevenlabs.io/",
+    "statusCode": 200,
+    "contentType": "text/html; charset=utf-8",
+    "timezone": "America/New_York",
+    "proxyUsed": "basic",
+    "indexId": "639fc174-ee9f-46ca-a16c-c070b1d371a1",
+    "creditsUsed": 1,
+    "concurrencyLimited": false
+  },
+  "images": [
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/5uq97l03el-deliveroo.svg",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/safety-accountability.svg",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/oy5wbcy6iup-telus-digital.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Fcreative-8.2ab723e3.png&w=3840&q=80",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2FCover0.jpg&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/owjxm46sit-bertelsmann.svg",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/3vzix2z6v14-salesforce.svg",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/cisco.svg",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/deliveroo.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Feleven-creative.f5fbfcf5.png&w=3840&q=80",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Fcreative-9.e00adc24.png&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/00bymowm0db5b-clay.svg",
+    "https://eleven-public-cdn.elevenlabs.io/marketing_website/_next/static/media/noise@20aq.289c1f1d.avif",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2F3egcmfadw3h-matthew-mcconaughey.webp&w=3840&q=80",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2Fyfzxw4iha5-eleven-creative.webp&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/marketing_website/_next/static/media/noise.24b8225d.png",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Fcreative-1.be8a6b68.png&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/bxqvtgcqetk-walt-disney-studios.svg",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/o496xt9mfj-epic-games.svg",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/jzd5y1h9jw-meesho.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2Fgmhm1kxxzgd-Background7.webp&w=3840&q=80",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Fcreative-3.04cea590.png&w=3840&q=80",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2Fspeech-to-speech-api.webp&w=3840&q=80",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Fagents-2.9a229117.png&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/cars24.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2F7ga82q8pxzm-deutsche-telekom-bg.webp&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/rotp09jdua-chess-com.svg",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/2hamwon7aqc-twilio.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2Forh9rtvqrrf-eleven-agents.webp&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/ehdvze58qop-harvey.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2Fklynektbpi-BlogCover7.jpg&w=3840&q=80",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Fpurpleblue.7b1b4a1a.webp&w=3840&q=50",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Fgreen.9f6a4e17.webp&w=3840&q=50",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Fframe%403x.8b34383e.png&w=3840&q=90",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/meesho.svg",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/zewkdwrlplg-ukraine.svg",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/nvidia.svg",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/3b1a2dk6n8h-kpn.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2Fredchdw2op-bento-orange-blue-2%403x.webp&w=3840&q=80",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2FVoice%20BG%2004.0d9fd817.png&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/nvidia-1.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Ftimeline%403x.2d3b8b24.png&w=3840&q=90",
+    "https://eleven-public-cdn.elevenlabs.io/images/flags/circle-flags/us.svg",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/deutsche-telekom-1.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Feleven-api.6fcc2b4f.png&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/safety-provenance.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2Fc26lff3ikup-ukraine.webp&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/m9wl23uymuf-revolut.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2Fmbvy2yvrs5d-Eric%20Dane%20_1080x1080.webp&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/safety-moderation.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2Fxuo8mc9lweg-dali.webp&w=3840&q=80",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2FBlogCover10.jpg&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/meta.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fpayloadcms%2Fqrihua4053-nvida-bg.webp&w=3840&q=80",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Fcreative-5.f21107e1.png&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/duolingo.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Fcreative-4.60676b95.png&w=3840&q=80",
+    "https://eleven-public-cdn.elevenlabs.io/payloadcms/jlle07kolq-tvs.svg",
+    "https://elevenlabs.io/_next/image?url=https%3A%2F%2Feleven-public-cdn.elevenlabs.io%2Fmarketing_website%2F_next%2Fstatic%2Fmedia%2Feleven-agents.d9236159.png&w=3840&q=80"
+  ]
+}

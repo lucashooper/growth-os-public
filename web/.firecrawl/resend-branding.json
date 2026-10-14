@@ -1,0 +1,191 @@
+{
+  "branding": {
+    "colorScheme": "dark",
+    "fonts": [
+      {
+        "family": "Inter",
+        "role": "body"
+      },
+      {
+        "family": "ABCFavorit",
+        "role": "heading"
+      },
+      {
+        "family": "Helvetica",
+        "role": "unknown"
+      }
+    ],
+    "colors": {
+      "primary": "#00A3FF",
+      "secondary": "#4983C2",
+      "accent": "#00A3FF",
+      "background": "#000000",
+      "textPrimary": "#FFFFFF",
+      "link": "#3B9EFF"
+    },
+    "typography": {
+      "fontFamilies": {
+        "primary": "Inter",
+        "heading": "ABCFavorit"
+      },
+      "fontStacks": {
+        "heading": [
+          "domaine",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji"
+        ],
+        "body": [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji"
+        ],
+        "paragraph": [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji"
+        ]
+      },
+      "fontSizes": {
+        "h1": "96px",
+        "h2": "56px",
+        "body": "18px"
+      }
+    },
+    "spacing": {
+      "baseUnit": 4,
+      "borderRadius": "4px"
+    },
+    "components": {
+      "buttonPrimary": {
+        "background": "#00A3FF",
+        "textColor": "#FFFFFF",
+        "borderRadius": "4px",
+        "borderRadiusCorners": {
+          "topLeft": "4px",
+          "topRight": "4px",
+          "bottomRight": "4px",
+          "bottomLeft": "4px"
+        },
+        "shadow": "none"
+      },
+      "buttonSecondary": {
+        "background": "transparent",
+        "textColor": "#FFFFFF",
+        "borderColor": "#0D0D0D",
+        "borderRadius": "16px",
+        "borderRadiusCorners": {
+          "topLeft": "16px",
+          "topRight": "16px",
+          "bottomRight": "16px",
+          "bottomLeft": "16px"
+        },
+        "shadow": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px"
+      }
+    },
+    "images": {
+      "logo": "data:image/svg+xml;utf8,%3Csvg%20role%3D%22img%22%20aria-label%3D%22Resend%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20377%2081%22%20fill%3D%22none%22%20width%3D%2280%22%20data-fc-idx%3D%220%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22M103.704%2022.537c17.023%200%2029.411%2011.829%2028.532%2033.327H90.781c1.548%205.975%205.684%2011.109%2013.963%2011.109%204.635%200%208.871-1.279%2012.068-5.275h14.306l-.241%201.279C128.4%2073.926%20115.932%2080%20104.744%2080c-17.743%200-29.65-11.988-29.65-28.691%200-16.704%2011.907-28.772%2028.61-28.772Zm119.96%200c17.103%200%2029.411%2011.829%2028.612%2033.327H210.81c1.529%205.975%205.635%2011.109%2013.974%2011.109%204.635%200%208.871-1.279%2011.988-5.275h14.386l-.241%201.279C248.44%2073.926%20235.972%2080%20224.784%2080c-17.743%200-29.651-11.988-29.651-28.691%200-16.704%2011.908-28.772%2028.531-28.772Zm-60.978-.32c12.627%200%2023.736%204.556%2026.933%2015.745l.32%201.2h-15.744c-3.357-4.157-7.833-4.717-11.509-4.717-3.437%200-8.871.88-8.871%204.237%200%203.116%203.596%204.155%206.713%204.554l9.111.96c14.465%201.278%2020.859%206.953%2020.859%2018.062%200%2012.787-12.707%2017.582-25.254%2017.582-12.548%200-25.576-5.594-28.053-16.943l-.239-1.199h16.143c2.237%206.392%2012.542%205.915%2012.149%205.914%206.073%200%209.829-1.838%209.83-4.795%200-1.918-.64-4.156-6.873-4.955l-9.511-.959c-12.548-.879-20.14-7.512-20.14-17.422%200-12.148%2011.509-17.263%2024.136-17.263Zm214.185%2056.184h-15.504l.799-7.752c-2.157%204.636-9.111%209.19-17.822%209.19-14.385%200-26.054-11.028-26.054-28.45%200-17.423%2011.509-28.452%2026.054-28.452%207.912%200%2012.787%202.557%2017.103%206.953V0h15.424v78.401ZM48.081%200c15.184%200%2024.215%209.03%2024.215%2021.019%200%2011.988-9.03%2021.019-24.216%2021.02h-7.672L78.53%2078.4H51.597L22.587%2050.83c-2.079-1.918-3.038-4.156-3.038-6.074%200-2.717%201.918-5.114%205.594-6.153l14.945-3.996c5.674-1.519%209.59-5.915%209.591-11.669%200-7.032-5.754-11.109-12.867-11.109H.128V0H48.08Zm241.677%2022.617c13.587%200%2023.098%209.91%2023.098%2024.056V78.4h-15.505v-29.09c0-7.992-4.236-12.788-11.748-12.788-7.513%200-12.388%204.955-12.388%2012.787v29.091h-15.184V23.736h15.423l-.718%208.711c2.238-4.395%209.19-9.83%2017.022-9.83Zm58.262%2013.906c-9.35%200-14.306%206.954-14.306%2014.866%200%208.471%205.595%2014.945%2014.306%2014.945%208.391%200%2013.826-6.554%2013.826-14.945%200-8.392-5.275-14.866-13.826-14.866Zm-244.316-1.598c-7.554%200-11.871%204.512-13.21%2010.55h26.148a24.052%2024.052%200%200%200-.63-2.239c-1.918-5.434-6.394-8.311-12.308-8.311Zm119.96%200c-7.489%200-11.793%204.512-13.13%2010.55h26.148a24.052%2024.052%200%200%200-.63-2.239c-1.918-5.434-6.394-8.311-12.388-8.311Z%22%20style%3D%22fill%3A%20rgb(240%2C%20240%2C%20240)%20!important%3B%22%2F%3E%3C%2Fsvg%3E",
+      "favicon": "https://resend.com/static/favicons/favicon-marketing.ico?v=1",
+      "ogImage": "https://resend.com/static/cover.png",
+      "logoHref": "/home",
+      "logoAlt": "Resend"
+    },
+    "__llm_logo_reasoning": {
+      "selectedIndex": 0,
+      "reasoning": "Selected #0 because it is visible, located in the header, and links to the homepage. The alt text matches the brand name 'Resend'.",
+      "confidence": 0.9,
+      "source": "llm"
+    },
+    "__llm_button_reasoning": {
+      "primary": {
+        "index": 3,
+        "text": "Get Started",
+        "reasoning": "Button #3 has a vibrant blue background (#00A3FF), which is the brand color, and the text 'Get Started' is a strong call-to-action, making it the primary CTA."
+      },
+      "secondary": {
+        "index": 5,
+        "text": "Get started",
+        "reasoning": "Button #5 has a transparent background, making it a suitable secondary button. It also has the text 'Get started', which complements the primary CTA."
+      },
+      "confidence": 0.95
+    },
+    "personality": {
+      "tone": "modern",
+      "energy": "medium",
+      "targetAudience": "developers"
+    },
+    "designSystem": {
+      "framework": "tailwind",
+      "componentLibrary": ""
+    },
+    "confidence": {
+      "buttons": 0.95,
+      "colors": 0.9,
+      "overall": 0.925
+    },
+    "__llm_metadata": {
+      "logoSelection": {
+        "llmCalled": true,
+        "llmSucceeded": true,
+        "finalSource": "llm",
+        "rawLogoSelection": {
+          "selectedLogoIndex": 0,
+          "selectedLogoReasoning": "Selected #0 because it is visible, located in the header, and links to the homepage. The alt text matches the brand name 'Resend'.",
+          "confidence": 0.9
+        }
+      },
+      "buttonClassification": {
+        "llmCalled": true,
+        "llmSucceeded": true
+      }
+    }
+  },
+  "metadata": {
+    "ogTitle": "Resend · Email for developers",
+    "color-scheme": "dark",
+    "robots": "index, follow",
+    "viewport": "width=device-width, initial-scale=1",
+    "ogDescription": "The best way to reach humans instead of spam folders. Deliver transactional and marketing emails at scale.",
+    "next-size-adjust": "",
+    "title": "Resend · Email for developers",
+    "ogImage": "https://resend.com/static/cover.png",
+    "description": "The best way to reach humans instead of spam folders. Deliver transactional and marketing emails at scale.",
+    "og:title": "Resend · Email for developers",
+    "og:image": "https://resend.com/static/cover.png",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Resend · Email for developers",
+    "author": "Resend",
+    "referrer": "origin-when-cross-origin",
+    "theme-color": "#000000",
+    "googlebot": "index, follow",
+    "og:description": "The best way to reach humans instead of spam folders. Deliver transactional and marketing emails at scale.",
+    "twitter:description": "The best way to reach humans instead of spam folders. Deliver transactional and marketing emails at scale.",
+    "twitter:image": "https://resend.com/static/cover.png",
+    "language": "en",
+    "favicon": "https://resend.com/static/favicons/favicon-marketing.ico?v=1",
+    "scrapeId": "019fa3e1-57e0-72ec-9076-72b57cada8da",
+    "sourceURL": "https://resend.com/",
+    "url": "https://resend.com/",
+    "statusCode": 200,
+    "contentType": "text/html; charset=utf-8",
+    "timezone": "America/New_York",
+    "proxyUsed": "basic",
+    "indexId": "8ae62e1d-204a-4f8e-ae33-9a6429828bb2",
+    "creditsUsed": 1,
+    "concurrencyLimited": false
+  }
+}

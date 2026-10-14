@@ -1,0 +1,24 @@
+-- Growth OS · Supabase Auth URL configuration
+--
+-- Replace https://your-domain.example with the same origin as APP_BASE_URL
+-- (no trailing slash). Authentication → URL configuration:
+--   Site URL:
+--     https://your-domain.example
+--   Redirect URLs (add all):
+--     https://your-domain.example/**
+--     https://your-domain.example/auth/callback
+--     https://your-domain.example/auth/confirm
+--     http://localhost:3000/**
+--     http://localhost:3000/auth/callback
+--     http://localhost:3000/auth/confirm
+--
+-- TikTok Developer Portal → Login Kit → Redirect URI (exact match, no trailing slash):
+--   https://your-domain.example/api/tiktok/oauth/callback
+--   http://localhost:3000/api/tiktok/oauth/callback
+--
+-- Hosting env (Netlify, or whichever host you use):
+--   APP_BASE_URL=https://your-domain.example
+--   NEXT_PUBLIC_APP_BASE_URL=https://your-domain.example
+--   DATABASE_URL=<Supabase transaction pooler URI, port 6543>
+--
+-- After env changes, redeploy so Next.js rebuilds public variables.

@@ -1,0 +1,844 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // Local: sqlite (file:./dev.db). Production: change to "postgresql" + Supabase DATABASE_URL.
+  // Schema is Postgres-compatible (no SQLite-only types).
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+/** App user — id matches Supabase auth.users.id */
+model User {
+  id          String            @id
+  email       String            @unique
+  name        String            @default("")
+  avatarUrl   String            @default("")
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  memberships WorkspaceMember[]
+}
+
+model Workspace {
+  id                    String            @id @default(cuid())
+  name                  String
+  slug                  String            @unique
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @default(now()) @updatedAt
+  stripeCustomerId      String?
+  stripeSubscriptionId  String?
+  subscriptionTier      String            @default("free")
+  subscriptionStatus    String            @default("inactive")
+  currentPeriodEnd      DateTime?
+  members               WorkspaceMember[]
+  projects              Project[]
+  settings              Setting[]
+  conversations         Conversation[]
+  creatorLeads          CreatorLead[]
+  outreachCampaigns     OutreachCampaign[]
+  integrations          WorkspaceIntegration[]
+}
+
+model WorkspaceMember {
+  id          String    @id @default(cuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  /** Owner | Admin | Editor | Viewer */
+  role        String    @default("Owner")
+  createdAt   DateTime  @default(now())
+
+  @@unique([workspaceId, userId])
+  @@index([userId])
+}
+
+/** Global key/value flags (e.g. legacy_claimed) */
+model SystemFlag {
+  key       String   @id
+  value     String   @default("")
+  updatedAt DateTime @updatedAt
+}
+
+/**
+ * Stripe card fingerprints that have already claimed a free trial.
+ * Blocks trial reuse across accounts; never blocks paying subscribers updating cards.
+ */
+model UsedTrialFingerprint {
+  id               String   @id @default(cuid())
+  cardFingerprint  String   @unique
+  userId           String
+  workspaceId      String   @default("")
+  stripeCustomerId String   @default("")
+  lastUsedAt       DateTime @default(now())
+  createdAt        DateTime @default(now())
+
+  @@index([userId])
+  @@index([lastUsedAt])
+}
+
+model Project {
+  id            String             @id @default(cuid())
+  workspaceId   String
+  workspace     Workspace          @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  name          String
+  slug          String
+  description   String             @default("")
+  color         String             @default("oklch(0.72 0.12 160)")
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  accounts      ConnectedAccount[]
+  posts         Post[]
+  experiments   Experiment[]
+  findings      Finding[]
+  conversations Conversation[]
+  libraryAssets LibraryAsset[]
+  competitors   Competitor[]
+  dailyMetrics  DailyMetric[]
+  queueItems    QueueItem[]
+  brandPacks    BrandPack[]
+  contentFlows  ContentFlow[]
+  imagePacks    ImagePack[]
+  formatReferences FormatReference[]
+  hookRecords   HookRecord[]
+  creativeRecords CreativeRecord[]
+  intelSyncJobs IntelSyncJob[]
+
+  @@unique([workspaceId, slug])
+}
+
+model WorkspaceIntegration {
+  id              String    @id @default(cuid())
+  workspaceId     String
+  workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  provider        String
+  apiKeyEncrypted String    @default("")
+  isActive        Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@unique([workspaceId, provider])
+  @@index([workspaceId])
+}
+
+model ConnectedAccount {
+  id               String            @id @default(cuid())
+  projectId        String
+  project          Project           @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  platform         String            @default("tiktok")
+  username         String
+  nickname         String            @default("")
+  avatar           String            @default("")
+  bio              String            @default("")
+  followers        Int               @default(0)
+  following        Int               @default(0)
+  hearts           Int               @default(0)
+  videoCount       Int               @default(0)
+  secUid           String            @default("")
+  /** TikTok Login Kit open_id */
+  openId           String            @default("")
+  /** Owning Growth OS user (Supabase auth id) for OAuth connections */
+  userId           String            @default("")
+  accessToken      String            @default("")
+  refreshToken     String            @default("")
+  tokenExpiresAt   DateTime?
+  oauthScopes      String            @default("")
+  oauthConnectedAt DateTime?
+  lastSyncAt       DateTime?
+  status           String            @default("active")
+  lastError        String?
+  rawProfile       String?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  syncLogs         SyncLog[]
+  posts            Post[]
+  publishJobs      PublishJob[]
+  publishAttempts  PublishAttempt[]
+  publishHealth    PublishHealth?
+
+  @@unique([projectId, platform, username])
+  @@index([projectId])
+  @@index([openId])
+  @@index([userId])
+}
+
+model PublishJob {
+  id            String            @id @default(cuid())
+  projectId     String
+  accountId     String
+  account       ConnectedAccount  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  platform      String            @default("tiktok")
+  postId        String?
+  publishId     String            @default("")
+  status        String            @default("pending")
+  title         String            @default("")
+  caption       String            @default("")
+  privacyLevel  String            @default("")
+  imageUrlsJson String            @default("[]")
+  error         String?
+  metaJson      String            @default("{}")
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  @@index([accountId, createdAt])
+  @@index([projectId, status])
+}
+
+model SyncLog {
+  id          String           @id @default(cuid())
+  accountId   String
+  account     ConnectedAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  startedAt   DateTime         @default(now())
+  finishedAt  DateTime?
+  status      String           @default("running")
+  stepsJson   String           @default("[]")
+  error       String?
+  rawResponse String?
+  attempt     Int              @default(1)
+
+  @@index([accountId, startedAt])
+}
+
+model Post {
+  id              String             @id @default(cuid())
+  projectId       String
+  project         Project            @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  accountId       String?
+  account         ConnectedAccount?  @relation(fields: [accountId], references: [id], onDelete: SetNull)
+  experimentId    String?
+  experiment      Experiment?        @relation(fields: [experimentId], references: [id], onDelete: SetNull)
+  externalId      String?
+  hook            String
+  caption         String             @default("")
+  slidesJson      String             @default("[]")
+  metaJson        String             @default("{}")
+  status          String             @default("draft")
+  theme           String             @default("")
+  variantKey      String             @default("")
+  coverUrl        String             @default("")
+  shareUrl        String             @default("")
+  views           Int                @default(0)
+  likes           Int                @default(0)
+  comments        Int                @default(0)
+  saves           Int                @default(0)
+  downloads       Int                @default(0)
+  shares          Int                @default(0)
+  ctr             Float              @default(0)
+  publishedAt     DateTime?
+  scheduledAt     DateTime?
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  libraryAssets   LibraryAsset[]
+  publishAttempts PublishAttempt[]
+
+  @@unique([accountId, externalId])
+  @@index([projectId, status])
+  @@index([experimentId])
+}
+
+model DailyMetric {
+  id         String   @id @default(cuid())
+  projectId  String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  date       DateTime
+  views      Int      @default(0)
+  likes      Int      @default(0)
+  comments   Int      @default(0)
+  downloads  Int      @default(0)
+  followers  Int      @default(0)
+
+  @@unique([projectId, date])
+}
+
+model Experiment {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name        String
+  kind        String   @default("manual")
+  hypothesis  String   @default("")
+  status      String   @default("running")
+  posts       Int      @default(0)
+  winner      String?
+  confidence  Float    @default(0)
+  lift        Float    @default(0)
+  armsJson    String   @default("[]")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  postRows    Post[]
+
+  @@index([projectId])
+  @@unique([projectId, name])
+}
+
+model Finding {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  severity  String   @default("info")
+  text      String
+  source    String   @default("agent")
+  metaJson  String   @default("{}")
+  createdAt DateTime @default(now())
+
+  @@index([projectId, createdAt])
+}
+
+model Conversation {
+  id          String    @id @default(cuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  projectId   String?
+  project     Project?  @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  title       String    @default("New chat")
+  kind        String    @default("chat")
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  messages    Message[]
+
+  @@index([workspaceId, updatedAt])
+}
+
+model Message {
+  id              String       @id @default(cuid())
+  conversationId  String
+  conversation    Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role            String
+  content         String
+  attachmentsJson String       @default("[]")
+  /** citedPosts, competitorCards, etc. — keeps chat media previews after reload */
+  metaJson        String       @default("{}")
+  createdAt       DateTime     @default(now())
+
+  @@index([conversationId, createdAt])
+}
+
+model Setting {
+  id          String    @id @default(cuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  key         String
+  value       String
+
+  @@unique([workspaceId, key])
+}
+
+model JobRun {
+  id         String    @id @default(cuid())
+  type       String
+  status     String    @default("pending")
+  startedAt  DateTime  @default(now())
+  finishedAt DateTime?
+  detail     String?
+  error      String?
+
+  @@index([startedAt])
+}
+
+model DevLog {
+  id        String   @id @default(cuid())
+  level     String   @default("info")
+  category  String
+  message   String
+  metaJson  String   @default("{}")
+  createdAt DateTime @default(now())
+
+  @@index([category, createdAt])
+  @@index([level, createdAt])
+}
+
+model LibraryAsset {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name      String   @default("")
+  kind      String   @default("image")
+  folder    String   @default("")
+  mime      String   @default("")
+  size      Int      @default(0)
+  url       String   @default("")
+  path      String   @default("")
+  theme     String   @default("")
+  tagsJson  String   @default("[]")
+  tone      String   @default("")
+  source    String   @default("upload")
+  postId    String?
+  post      Post?    @relation(fields: [postId], references: [id], onDelete: SetNull)
+  uses      Int      @default(0)
+  avgViews  Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([projectId, folder])
+  @@index([projectId, kind])
+}
+
+model Competitor {
+  id            String                  @id @default(cuid())
+  projectId     String
+  project       Project                 @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  /** Unique key per project — derived from TikTok handle, website host, or name */
+  slug          String
+  name          String                  @default("")
+  /** tiktok | brand */
+  kind          String                  @default("tiktok")
+  /** TikTok @handle without @; empty if TikTok not linked */
+  handle        String                  @default("")
+  niche         String                  @default("")
+  websiteUrl    String                  @default("")
+  appStoreUrl   String                  @default("")
+  playStoreUrl  String                  @default("")
+  metaPageId    String                  @default("")
+  instagram     String                  @default("")
+  facebookPage  String                  @default("")
+  twitter       String                  @default("")
+  youtube       String                  @default("")
+  /** daily | weekly | manual */
+  syncCadence   String                  @default("manual")
+  nextSyncAt    DateTime?
+  avatar        String                  @default("")
+  bio           String                  @default("")
+  followers     Int                     @default(0)
+  hearts        Int                     @default(0)
+  videoCount    Int                     @default(0)
+  secUid        String                  @default("")
+  avgViews      Int                     @default(0)
+  topHook       String                  @default("")
+  postingFreq   String                  @default("")
+  aiSummary     String                  @default("")
+  aiSummaryAt   DateTime?
+  /** Derived metrics: hashtags, posting hours, freq7d/30d, website/app meta */
+  signalsJson   String                  @default("{}")
+  lastSyncAt    DateTime?
+  lastError     String?
+  createdAt     DateTime                @default(now())
+  updatedAt     DateTime                @updatedAt
+  posts         CompetitorPost[]
+  observations  CompetitorObservation[]
+  snapshots     CompetitorSnapshot[]
+  assets        CompetitorAsset[]
+  hooks         HookRecord[]
+  creatives     CreativeRecord[]
+  versions      CompetitorVersion[]
+  syncJobs      IntelSyncJob[]
+
+  @@unique([projectId, slug])
+  @@index([projectId])
+  @@index([projectId, handle])
+}
+
+model CompetitorPost {
+  id            String     @id @default(cuid())
+  competitorId  String
+  competitor    Competitor @relation(fields: [competitorId], references: [id], onDelete: Cascade)
+  externalId    String
+  hook          String     @default("")
+  caption       String     @default("")
+  coverUrl      String     @default("")
+  shareUrl      String     @default("")
+  views         Int        @default(0)
+  likes         Int        @default(0)
+  comments      Int        @default(0)
+  shares        Int        @default(0)
+  saves         Int        @default(0)
+  hashtagsJson  String     @default("[]")
+  hourUtc       Int?
+  publishedAt   DateTime?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+
+  @@unique([competitorId, externalId])
+  @@index([competitorId, views])
+  @@index([competitorId, publishedAt])
+}
+
+/** Append-only raw provider payloads for diffs and future providers */
+model CompetitorObservation {
+  id           String     @id @default(cuid())
+  competitorId String
+  competitor   Competitor @relation(fields: [competitorId], references: [id], onDelete: Cascade)
+  provider     String
+  observedAt   DateTime   @default(now())
+  payloadJson  String     @default("{}")
+  ok           Boolean    @default(true)
+  error        String?
+
+  @@index([competitorId, provider, observedAt])
+}
+
+/** Daily rollup for week-over-week competitor signals */
+model CompetitorSnapshot {
+  id               String     @id @default(cuid())
+  competitorId     String
+  competitor       Competitor @relation(fields: [competitorId], references: [id], onDelete: Cascade)
+  date             DateTime
+  followers        Int        @default(0)
+  posts7d          Int        @default(0)
+  posts30d         Int        @default(0)
+  avgViews         Int        @default(0)
+  topHashtagsJson  String     @default("[]")
+  postingHoursJson String     @default("{}")
+  appRating        Float?
+  adCreativeCount  Int        @default(0)
+  metaJson         String     @default("{}")
+  createdAt        DateTime   @default(now())
+
+  @@unique([competitorId, date])
+  @@index([competitorId, date])
+}
+
+model CompetitorAsset {
+  id           String     @id @default(cuid())
+  competitorId String
+  competitor   Competitor @relation(fields: [competitorId], references: [id], onDelete: Cascade)
+  /** thumbnail | meta_ad | screenshot | og_image | landing | first_frame */
+  kind         String     @default("thumbnail")
+  url          String     @default("")
+  externalId   String     @default("")
+  title        String     @default("")
+  metaJson     String     @default("{}")
+  observedAt   DateTime   @default(now())
+  createdAt    DateTime   @default(now())
+
+  @@index([competitorId, kind])
+  @@unique([competitorId, kind, externalId])
+}
+
+/** Append-only versioned snapshots (never overwrite) for change detection */
+model CompetitorVersion {
+  id           String     @id @default(cuid())
+  competitorId String
+  competitor   Competitor @relation(fields: [competitorId], references: [id], onDelete: Cascade)
+  provider     String
+  fingerprint  String     @default("")
+  summary      String     @default("")
+  payloadJson  String     @default("{}")
+  screenshotUrl String    @default("")
+  htmlPath     String     @default("")
+  changesJson  String     @default("[]")
+  observedAt   DateTime   @default(now())
+
+  @@index([competitorId, provider, observedAt])
+  @@index([competitorId, fingerprint])
+}
+
+/** Searchable hook intelligence extracted from TikTok / ads / own posts */
+model HookRecord {
+  id              String     @id @default(cuid())
+  projectId       String
+  project         Project    @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  competitorId    String?
+  competitor      Competitor? @relation(fields: [competitorId], references: [id], onDelete: SetNull)
+  source          String     @default("tiktok")
+  externalId      String     @default("")
+  hook            String
+  topic           String     @default("")
+  emotion         String     @default("")
+  cta             String     @default("")
+  structure       String     @default("")
+  openingSentence String     @default("")
+  visualStyle     String     @default("")
+  colourPalette   String     @default("")
+  slides          Int        @default(0)
+  estimatedEngagement Float  @default(0)
+  views           Int        @default(0)
+  coverUrl        String     @default("")
+  metaJson        String     @default("{}")
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  @@index([projectId, views])
+  @@index([projectId, topic])
+  @@index([projectId, emotion])
+  @@unique([projectId, source, externalId, hook])
+}
+
+/** Searchable creatives — ads + TikTok covers + landing screenshots */
+model CreativeRecord {
+  id           String      @id @default(cuid())
+  projectId    String
+  project      Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  competitorId String?
+  competitor   Competitor? @relation(fields: [competitorId], references: [id], onDelete: SetNull)
+  source       String      @default("tiktok")
+  kind         String      @default("image")
+  externalId   String      @default("")
+  title        String      @default("")
+  hook         String      @default("")
+  cta          String      @default("")
+  copy         String      @default("")
+  colourPalette String     @default("")
+  mediaUrl     String      @default("")
+  landingUrl   String      @default("")
+  platformsJson String     @default("[]")
+  status       String      @default("active")
+  firstSeenAt  DateTime    @default(now())
+  lastSeenAt   DateTime    @default(now())
+  metaJson     String      @default("{}")
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@unique([projectId, source, externalId])
+  @@index([projectId, source])
+  @@index([projectId, hook])
+  @@index([competitorId])
+}
+
+model IntelSyncJob {
+  id           String      @id @default(cuid())
+  projectId    String
+  project      Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  competitorId String?
+  competitor   Competitor? @relation(fields: [competitorId], references: [id], onDelete: Cascade)
+  /** manual | daily | weekly | deep_search */
+  cadence      String      @default("manual")
+  status       String      @default("pending")
+  providersJson String     @default("[]")
+  resultJson   String      @default("{}")
+  error        String?
+  startedAt    DateTime?
+  finishedAt   DateTime?
+  createdAt    DateTime    @default(now())
+
+  @@index([projectId, status, createdAt])
+  @@index([competitorId, createdAt])
+}
+
+model QueueItem {
+  id        String   @id @default(cuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  postId    String?
+  day       String
+  time      String
+  hook      String
+  status    String   @default("draft")
+  createdAt DateTime @default(now())
+
+  @@index([projectId])
+}
+
+model PublishAttempt {
+  id              String            @id @default(cuid())
+  postId          String
+  post            Post              @relation(fields: [postId], references: [id], onDelete: Cascade)
+  accountId       String
+  account         ConnectedAccount  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  projectId       String
+  
+  scheduledAt     DateTime
+  publishWindow   Int               @default(0)
+  actualPublishAt DateTime?
+  
+  status          String            @default("QUEUED")
+  attempt         Int               @default(1)
+  maxRetries      Int               @default(3)
+  
+  lockedAt        DateTime?
+  lockedBy        String?
+  
+  publishJobId    String?
+  publishId       String?
+  error           String?
+  errorCode       String?
+  
+  priority        Int               @default(0)
+  source          String            @default("manual")
+  metaJson        String            @default("{}")
+  
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  
+  @@index([status, scheduledAt])
+  @@index([accountId, status])
+  @@index([postId])
+  @@index([projectId, status])
+}
+
+model PublishHealth {
+  id              String            @id @default(cuid())
+  accountId       String            @unique
+  account         ConnectedAccount  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  
+  lastPublishAt   DateTime?
+  lastSuccessAt   DateTime?
+  lastFailureAt   DateTime?
+  
+  publishCount24h Int               @default(0)
+  publishCount1h  Int               @default(0)
+  windowResetAt   DateTime          @default(now())
+  
+  successCount    Int               @default(0)
+  failureCount    Int               @default(0)
+  successRate     Float             @default(1.0)
+  
+  isRateLimited   Boolean           @default(false)
+  rateLimitUntil  DateTime?
+  
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+  
+  @@index([isRateLimited])
+}
+
+model BrandPack {
+  id          String   @id @default(cuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name        String
+  slug        String
+  description String   @default("")
+  colorsJson  String   @default("{}")
+  fontsJson   String   @default("{}")
+  assetsJson  String   @default("[]")
+  previewCss  String   @default("")
+  isDefault   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([projectId, slug])
+  @@index([projectId])
+}
+
+/** Named image collections used by the carousel renderer */
+model ImagePack {
+  id          String           @id @default(cuid())
+  projectId   String
+  project     Project          @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name        String
+  slug        String
+  description String           @default("")
+  /** sequential | random | ai */
+  orderMode   String           @default("ai")
+  isDefault   Boolean          @default(false)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  assets      ImagePackAsset[]
+
+  @@unique([projectId, slug])
+  @@index([projectId])
+}
+
+model ImagePackAsset {
+  id          String    @id @default(cuid())
+  packId      String
+  pack        ImagePack @relation(fields: [packId], references: [id], onDelete: Cascade)
+  label       String    @default("")
+  kind        String    @default("background")
+  url         String
+  path        String    @default("")
+  /** Short scene description for AI image picking */
+  description String    @default("")
+  tagsJson    String    @default("[]")
+  /** When false, skip this image in sequential/random/AI assembly */
+  includedInSequence Boolean @default(true)
+  sortOrder   Int       @default(0)
+  createdAt   DateTime  @default(now())
+
+  @@index([packId, sortOrder])
+}
+
+/** Saved storytelling / informational few-shot references for the Generator */
+model FormatReference {
+  id             String   @id @default(cuid())
+  projectId      String
+  project        Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  /** storytelling | informational */
+  format         String   @default("informational")
+  title          String   @default("")
+  sourceUrl      String   @default("")
+  hook           String   @default("")
+  slidesJson     String   @default("[]")
+  structureNotes String   @default("")
+  coverUrl       String   @default("")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@index([projectId, format])
+}
+
+model ContentFlow {
+  id            String   @id @default(cuid())
+  projectId     String
+  project       Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name          String
+  slug          String
+  description   String   @default("")
+  beatsJson     String   @default("[]")
+  slideCount    Int      @default(6)
+  avgEngagement Float    @default(0)
+  sampleSize    Int      @default(0)
+  isDefault     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([projectId, slug])
+  @@index([projectId])
+}
+
+model AiLog {
+  id           String   @id @default(cuid())
+  projectId    String?
+  action       String
+  provider     String   @default("")
+  model        String   @default("")
+  promptJson   String   @default("[]")
+  responseText String   @default("")
+  tokensIn     Int      @default(0)
+  tokensOut    Int      @default(0)
+  latencyMs    Int      @default(0)
+  ok           Boolean  @default(true)
+  error        String?
+  metaJson     String   @default("{}")
+  createdAt    DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([action, createdAt])
+  @@index([ok, createdAt])
+}
+
+/** Creator outreach / affiliate pipeline lead */
+model CreatorLead {
+  id             String    @id @default(cuid())
+  workspaceId    String
+  workspace      Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  projectId      String    @default("")
+  platform       String    @default("tiktok")
+  username       String
+  displayName    String    @default("")
+  avatarUrl      String    @default("")
+  followerCount  Int       @default(0)
+  bio            String    @default("")
+  email          String    @default("")
+  bioLink        String    @default("")
+  niche          String    @default("")
+  suggestedPitch String    @default("")
+  emailSubject   String    @default("")
+  /** discovered | pitched | contacted | replied | onboarded */
+  status         String    @default("discovered")
+  sentAt         DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([workspaceId, platform, username])
+  @@index([workspaceId, status])
+  @@index([projectId])
+}
+
+model OutreachCampaign {
+  id          String    @id @default(cuid())
+  workspaceId String
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  projectId   String    @default("")
+  name        String    @default("")
+  query       String    @default("")
+  platform    String    @default("tiktok")
+  status      String    @default("draft")
+  leadIdsJson String    @default("[]")
+  sentCount   Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([workspaceId])
+  @@index([projectId])
+}

@@ -1,0 +1,204 @@
+{
+  "branding": {
+    "colorScheme": "dark",
+    "fonts": [
+      {
+        "family": "Inter",
+        "role": "body"
+      },
+      {
+        "family": "ivyPresto",
+        "role": "unknown"
+      }
+    ],
+    "colors": {
+      "primary": "#777A88",
+      "secondary": "#2C2019",
+      "accent": "#FFFFFF",
+      "background": "#040406",
+      "textPrimary": "#040406",
+      "link": "#82292A"
+    },
+    "typography": {
+      "fontFamilies": {
+        "primary": "Inter",
+        "heading": "Inter"
+      },
+      "fontStacks": {
+        "heading": [
+          "ivyPresto",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji"
+        ],
+        "body": [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji"
+        ],
+        "paragraph": [
+          "Inter",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          "Apple Color Emoji",
+          "Segoe UI Emoji",
+          "Segoe UI Symbol",
+          "Noto Color Emoji"
+        ]
+      },
+      "fontSizes": {
+        "h1": "64px",
+        "h2": "52px",
+        "body": "14px"
+      }
+    },
+    "spacing": {
+      "baseUnit": 4,
+      "borderRadius": "8px"
+    },
+    "components": {
+      "input": {
+        "background": "transparent",
+        "textColor": "#FFFFFF",
+        "borderColor": null,
+        "borderRadius": "9999px",
+        "borderRadiusCorners": {
+          "topLeft": "9999px",
+          "topRight": "9999px",
+          "bottomRight": "9999px",
+          "bottomLeft": "9999px"
+        },
+        "shadow": "none"
+      },
+      "buttonPrimary": {
+        "background": "#FFFFFF",
+        "textColor": "#09090B",
+        "borderRadius": "9999px",
+        "borderRadiusCorners": {
+          "topLeft": "9999px",
+          "topRight": "9999px",
+          "bottomRight": "9999px",
+          "bottomLeft": "9999px"
+        },
+        "shadow": "none"
+      },
+      "buttonSecondary": {
+        "background": "transparent",
+        "textColor": "#FFFFFF",
+        "borderColor": "#9194A1",
+        "borderRadius": "9999px",
+        "borderRadiusCorners": {
+          "topLeft": "9999px",
+          "topRight": "9999px",
+          "bottomRight": "9999px",
+          "bottomLeft": "9999px"
+        },
+        "shadow": "none"
+      }
+    },
+    "images": {
+      "logo": "https://www.slash.com/_next/static/media/fd0c0324b9d9b1f5d86eb79b641ecb95.svg",
+      "favicon": "https://www.slash.com/favicon/favicon.png",
+      "ogImage": "https://www.slash.com/images/social-previews/index.jpg",
+      "logoHref": "/"
+    },
+    "__llm_logo_reasoning": {
+      "selectedIndex": 0,
+      "reasoning": "Selected #0 because it is visible, located in the header, and links to the homepage, aligning with the brand 'Slash'.",
+      "confidence": 0.95,
+      "source": "llm"
+    },
+    "__llm_button_reasoning": {
+      "primary": {
+        "index": 1,
+        "text": "Get Started",
+        "reasoning": "Button #1 'Get Started' has a clear call-to-action text and a distinct white background, making it stand out as a primary CTA."
+      },
+      "secondary": {
+        "index": 0,
+        "text": "Start for Free",
+        "reasoning": "Button #0 'Start for Free' has a transparent background with a border, making it suitable as a secondary CTA."
+      },
+      "confidence": 0.9
+    },
+    "personality": {
+      "tone": "professional",
+      "energy": "medium",
+      "targetAudience": "business professionals"
+    },
+    "designSystem": {
+      "framework": "tailwind",
+      "componentLibrary": ""
+    },
+    "confidence": {
+      "buttons": 0.9,
+      "colors": 0.9,
+      "overall": 0.9
+    },
+    "__llm_metadata": {
+      "logoSelection": {
+        "llmCalled": true,
+        "llmSucceeded": true,
+        "finalSource": "llm",
+        "rawLogoSelection": {
+          "selectedLogoIndex": 0,
+          "selectedLogoReasoning": "Selected #0 because it is visible, located in the header, and links to the homepage, aligning with the brand 'Slash'.",
+          "confidence": 0.95
+        }
+      },
+      "buttonClassification": {
+        "llmCalled": true,
+        "llmSucceeded": true
+      }
+    }
+  },
+  "metadata": {
+    "og:locale": "en",
+    "og:image:width": "1200",
+    "twitter:card": "summary_large_image",
+    "twitter:title": "Business Banking, Cards & Treasury | Slash",
+    "viewport": "width=device-width, initial-scale=1, viewport-fit=cover",
+    "ogLocale": "en",
+    "ogDescription": "Slash is a complete financial platform with business banking, corporate cards with up to 2% cashback, treasury, working capital, and global payments.",
+    "ogUrl": "https://www.slash.com/",
+    "og:title": "Business Banking, Cards & Treasury | Slash",
+    "ogSiteName": "Slash",
+    "og:site_name": "Slash",
+    "description": "Slash is a complete financial platform with business banking, corporate cards with up to 2% cashback, treasury, working capital, and global payments.",
+    "twitter:image": "https://www.slash.com/images/social-previews/index.jpg",
+    "og:image:height": "630",
+    "ogImage": "https://www.slash.com/images/social-previews/index.jpg",
+    "og:url": "https://www.slash.com/",
+    "title": "Business Banking, Cards & Treasury | Slash",
+    "twitter:image:width": "1200",
+    "language": "en",
+    "ogTitle": "Business Banking, Cards & Treasury | Slash",
+    "og:type": "website",
+    "twitter:description": "Slash is a complete financial platform with business banking, corporate cards with up to 2% cashback, treasury, working capital, and global payments.",
+    "og:description": "Slash is a complete financial platform with business banking, corporate cards with up to 2% cashback, treasury, working capital, and global payments.",
+    "twitter:image:height": "630",
+    "theme-color": "#040406",
+    "og:image": "https://www.slash.com/images/social-previews/index.jpg",
+    "favicon": "https://www.slash.com/favicon/favicon.png",
+    "scrapeId": "019fa3e9-ca1b-73c6-ae24-6673669e57b1",
+    "sourceURL": "https://www.slash.com/",
+    "url": "https://www.slash.com/",
+    "statusCode": 200,
+    "contentType": "text/html; charset=utf-8",
+    "timezone": "America/New_York",
+    "proxyUsed": "basic",
+    "indexId": "d774b4fa-e1ff-43ee-811e-d3ed07f1cfa4",
+    "creditsUsed": 1,
+    "concurrencyLimited": false
+  }
+}

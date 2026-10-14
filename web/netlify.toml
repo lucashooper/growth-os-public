@@ -1,0 +1,25 @@
+[build]
+  command = "npm run build"
+  # Next.js plugin publishes the SSR bundle — do not treat .next as a static site
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NEXT_TELEMETRY_DISABLED = "1"
+  # Ensure Prisma generates against Postgres on Netlify
+  # DATABASE_URL must be set in Netlify UI (Supabase Postgres URI)
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[functions]
+  node_bundler = "esbuild"
+  # Long TikTok sync / AI routes
+  included_files = ["prisma/**"]
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

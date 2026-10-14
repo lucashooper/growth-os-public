@@ -1,0 +1,66 @@
+# ============================================================
+# TikTok Marketing Bot — Configuration
+# Edit this file before running the pipeline
+# ============================================================
+
+# ---- YOUR APP -----------------------------------------------
+app:
+  name: "Insight"                          # e.g. "Notion", "BeReal"
+  description: "AI journaling app that tracks your emotions, finds patterns, and helps you understand yourself"
+  niche: "mental wellness"                 # lifestyle niche: productivity / travel / fitness / finance / wellness / creator
+  tagline: "Download link in bio"          # CTA text that appears on the final slide
+  url: "insight.app"                       # shown on slide 6
+
+# ---- TIKTOK ACCOUNTS ----------------------------------------
+accounts:
+  - handle: "@yourhandle"                  # Your TikTok @ handle (must be connected in SocialClaw)
+  # Add more accounts below:
+  # - handle: "@account2"
+  # - handle: "@account3"
+
+# ---- POSTING SCHEDULE ---------------------------------------
+posting:
+  posts_per_day: 2                         # How many posts per account per day
+  post_times:                              # Times to post (24h format, your local timezone)
+    - "09:00"
+    - "18:30"
+  start_date: "2026-07-14"                 # First posting date (YYYY-MM-DD)
+  days_to_schedule: 60                     # How many days of content to generate (60 = ~2 months)
+  timezone: "UTC"                          # Your timezone (e.g. America/New_York, Europe/London, UTC)
+
+# ---- SLIDESHOW STRUCTURE ------------------------------------
+content:
+  slides_per_post: 6                       # Total slides per post (recommend 6)
+  content_slides: 4                        # Pure content slides before the app mention
+  # The format is always: content x4 → ad warmup (slide 5) → app push (slide 6)
+
+  # Visual style of the slides (affects DALL-E image generation)
+  visual_style: "aesthetic male lifestyle photography, beach/ocean/sunset, editorial quality, moody golden hour"
+
+  # Hashtags to add to every post (mix broad + niche)
+  hashtags:
+    - "#fyp"
+    - "#foryoupage"
+    - "#mentalhealth"
+    - "#journaling"
+    - "#selfawareness"
+    - "#mindset"
+    - "#selfimprovement"
+
+  # How many image variations to generate per slide position
+  # (5 slide types × 20 images = 100 total images, enough for ~16 posts per slide position)
+  images_per_slide_type: 20
+
+# ---- IMAGE SETTINGS -----------------------------------------
+images:
+  width: 1080                              # TikTok standard (do not change)
+  height: 1920                             # TikTok standard (do not change)
+  quality: 90                              # JPEG quality (85-95 recommended)
+
+  # Text overlay style
+  text:
+    font_size: 62                          # Main text font size
+    color: "white"                         # Text color
+    bg_opacity: 0.65                       # Background strip opacity behind text (0.0 - 1.0)
+    position: "center"                     # "center" or "bottom"
+    padding: 40                            # Padding around text in pixels

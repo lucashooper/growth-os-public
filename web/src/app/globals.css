@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "TikTok Sans";
+  src: url("/fonts/tiktok-sans/TikTokSans-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root,
+:root[data-accent="emerald"] {
+  /* Single canvas — sidebar, header, and main share one fill (Postiz-style) */
+  --bg: #131315;
+  --surface: #131315;
+  --surface-2: #1a1a1c;
+  --border: rgba(255, 255, 255, 0.06);
+  --ink: #fafafa;
+  --muted: #a1a1aa;
+  --primary: #1754ff;
+  --primary-fg: #ffffff;
+  --accent: #3b82f6;
+  --danger: oklch(0.65 0.18 25);
+  --warning: oklch(0.78 0.14 85);
+  --success: #22c55e;
+  --ring: rgba(23, 84, 255, 0.45);
+  --sidebar: #131315;
+}
+
+:root[data-accent="violet"] {
+  --primary: #1754ff;
+  --primary-fg: #ffffff;
+  --accent: #3b82f6;
+  --success: #1754ff;
+  --ring: rgba(23, 84, 255, 0.45);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-fg: var(--primary-fg);
+  --color-accent: var(--accent);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-success: var(--success);
+  --color-sidebar: var(--sidebar);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+  --font-display: "General Sans", var(--font-inter), system-ui, sans-serif;
+  --radius-card: 14px;
+  --radius-pill: 999px;
+}
+
+.font-display {
+  font-family: "General Sans", var(--font-inter), system-ui, sans-serif;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+  overflow: visible;
+  line-height: 1.15;
+}
+
+/* Hero panels — LEFT (near type) dissolves; right bleeds; bottom soft-fades */
+.hero-mask-front {
+  -webkit-mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 8%,
+      black 42%,
+      black 78%,
+      transparent 100%
+    ),
+    linear-gradient(to bottom, black 62%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 8%,
+      black 42%,
+      black 78%,
+      transparent 100%
+    ),
+    linear-gradient(to bottom, black 62%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.hero-mask-back {
+  -webkit-mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 18%,
+      black 48%,
+      black 70%,
+      transparent 100%
+    ),
+    linear-gradient(to bottom, black 45%, transparent 90%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      transparent 18%,
+      black 48%,
+      black 70%,
+      transparent 100%
+    ),
+    linear-gradient(to bottom, black 45%, transparent 90%);
+  mask-composite: intersect;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(23, 84, 255, 0.35);
+}
+
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.loading-spiral {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 3px solid rgba(255, 255, 255, 0.08);
+  border-top-color: #a78bfa;
+  animation: loading-spiral 0.75s linear infinite;
+}
+
+@keyframes loading-spiral {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scrollbar — quiet */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}

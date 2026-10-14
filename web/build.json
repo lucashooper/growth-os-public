@@ -1,0 +1,11 @@
+﻿{
+  "id": "6a673f8fee5f180008ac798f",
+  "deploy_id": "6a673f8fee5f180008ac7991",
+  "sha": "c9e54f5d8db10200a6308bf71e21a19c2a45f359",
+  "done": true,
+  "error": "Failed during stage 'building site': Build script returned non-zero exit code: 2",
+  "created_at": "2026-07-27T11:22:55.323Z",
+  "deploy_state": "error",
+  "deploy_pending_review_reason": "",
+  "strict_contributor_verification_failure": false
+}
